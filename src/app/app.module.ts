@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { PostService } from './post.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent
@@ -12,7 +13,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
   imports: [
     BrowserModule,
     HttpClientModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    FormsModule
     ],
   providers: [PostService],
   bootstrap: [AppComponent]

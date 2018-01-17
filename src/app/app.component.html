@@ -13,8 +13,14 @@
     <li *ngIf="!selected?.length">No Selections</li>
   </ul>
 </div>
-
+<input
+type='text' [(ngModel)]="search"
+style='padding:8px;margin:15px auto;width:30%;'
+placeholder='Type to filter the name column...'
+(keyup)='updateFilter($event)'
+/>
   <ngx-datatable
+  #table
     class="material striped"
     [rows]="rows"
     [columnMode]="'force'"

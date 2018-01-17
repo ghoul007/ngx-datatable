@@ -13,4 +13,11 @@ export class PostService {
         page.pageNumber
     );
   }
+  searchPostsbtTitle(page, title): Observable<any> {
+    console.log("https://jsonplaceholder.typicode.com/posts?_limit=" + page.size + "&_page=" + page.pageNumber+"&title="+title);
+    return this._httpService.get(
+      "https://jsonplaceholder.typicode.com/posts?_limit="+page.size+"&_page=" +
+        page.pageNumber
+    );
+  }
 }
