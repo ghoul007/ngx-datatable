@@ -2,18 +2,50 @@
   <h3>
    Post
   </h3>
+
+
+<div class='selected-column'>
+  <h4>Selections <small>({{selected?.length}})</small></h4>
+  <ul>
+    <li *ngFor='let sel of selected'>
+      {{sel.title}}
+    </li>
+    <li *ngIf="!selected?.length">No Selections</li>
+  </ul>
+</div>
+
   <ngx-datatable
-    class="material"
+    class="material striped"
     [rows]="rows"
-    [columns]="[{name:'title'},{name:'body'}]"
     [columnMode]="'force'"
     [headerHeight]="50"
     [footerHeight]="50"
     [rowHeight]="'auto'"
+
     [externalPaging]="true"
     [count]="page.totalElements"
     [offset]="page.pageNumber"
     [limit]="page.size"
-    (page)='setPage($event)'>
-  </ngx-datatable>
+    (page)='setPage($event)'
+
+    [selected]="selected"
+    [selectionType]="'checkbox'"
+    [selectAllRowsOnPage]="false"
+    [displayCheck]="displayCheck"
+    (activate)="onActivate($event)"
+    (select)='onSelect($event)'>
+    <ngx-datatable-column
+    [width]="30"
+    [sortable]="false"
+    [canAutoResize]="false"
+    [draggable]="false"
+    [resizeable]="false"
+    [headerCheckboxable]="true"
+    [checkboxable]="true">
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Title"></ngx-datatable-column>
+  <ngx-datatable-column name="Body"></ngx-datatable-column>
+</ngx-datatable>
+
+
 </div>

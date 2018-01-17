@@ -7,6 +7,7 @@ import { PostService } from "./post.service";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
+  selected: any=[];
   page = new Page();
   rows = new Array<Post>();
 
@@ -20,6 +21,9 @@ export class AppComponent {
 
     this.setPage({ offset: 0 });
   }
+
+
+
 
   /**
    * Populate the table with new data based on the page number
@@ -38,6 +42,35 @@ export class AppComponent {
     console.log("pages   ", this.page)
   });
   }
+
+
+  onSelect({ selected }) {
+    console.log('Select Event', selected, this.selected);
+
+    this.selected.splice(0, this.selected.length);
+    this.selected.push(...selected);
+  }
+
+  onActivate(event) {
+    console.log('Activate Event', event);
+  }
+
+  add() {
+    this.selected.push(this.rows[1], this.rows[3]);
+  }
+
+  update() {
+    this.selected = [ this.rows[1], this.rows[3] ];
+  }
+
+  remove() {
+    this.selected = [];
+  }
+
+  displayCheck(row) {
+    return row.name !== 'Ethel Price';
+  }
+
 }
 
 /**
