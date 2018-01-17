@@ -6,8 +6,11 @@ import { Subscriber } from "rxjs/Subscriber";
 export class PostService {
   constructor(private _httpService: HttpClient) {}
 
-  getPosts(): Observable<any> {
-    return this._httpService
-      .get("https://jsonplaceholder.typicode.com/posts")
+  getPosts(page): Observable<any> {
+    console.log("https://jsonplaceholder.typicode.com/posts?_limit=" + page.size + "&_page=" + page.pageNumber);
+    return this._httpService.get(
+      "https://jsonplaceholder.typicode.com/posts?_limit="+page.size+"&_page=" +
+        page.pageNumber
+    );
   }
 }

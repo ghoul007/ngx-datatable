@@ -16,30 +16,28 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.postservice.getPosts().subscribe(res => {
-      this.page = {
-        size: 5,
-        totalElements: res.length,
-        totalPages: Math.floor(res.length / 5),
-        pageNumber: 1
-      };
-      this.rows = res;
-    });
 
-    // this.setPage({ offset: 0 });
+
+    this.setPage({ offset: 0 });
   }
 
   /**
    * Populate the table with new data based on the page number
    * @param page The page to select
    */
-  // setPage(pageInfo) {
+  setPage(pageInfo) {
   // this.page.pageNumber = pageInfo.offset;
-  // this.serverResultsService.getResults(this.page).subscribe(pagedData => {
-  // this.page = pagedData.page;
-  // this.rows = pagedData.data;
-  // });
-  // }
+  this.postservice.getPosts(this.page).subscribe(res => {
+    this.page = {
+      size: 10,
+      totalElements: 100,
+      totalPages: 10,
+      pageNumber: pageInfo.offset
+    };
+    this.rows = res;
+    console.log("pages   ", this.page)
+  });
+  }
 }
 
 /**
