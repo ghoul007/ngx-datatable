@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
+import { Subscriber } from "rxjs/Subscriber";
 @Injectable()
 export class PostService {
   constructor(private _httpService: HttpClient) {}

@@ -10,16 +10,20 @@ export class AppComponent {
   page = new Page();
   rows = new Array<Post>();
 
-  constructor(
-    private postservice: PostService
-  ) {
+  constructor(private postservice: PostService) {
     this.page.pageNumber = 0;
     this.page.size = 20;
   }
 
   ngOnInit() {
     this.postservice.getPosts().subscribe(res => {
-      console.log(res);
+      this.page = {
+        size: 5,
+        totalElements: res.length,
+        totalPages: Math.floor(res.length / 5),
+        pageNumber: 1
+      };
+      this.rows = res;
     });
 
     // this.setPage({ offset: 0 });
@@ -30,11 +34,11 @@ export class AppComponent {
    * @param page The page to select
    */
   // setPage(pageInfo) {
-    // this.page.pageNumber = pageInfo.offset;
-    // this.serverResultsService.getResults(this.page).subscribe(pagedData => {
-      // this.page = pagedData.page;
-      // this.rows = pagedData.data;
-    // });
+  // this.page.pageNumber = pageInfo.offset;
+  // this.serverResultsService.getResults(this.page).subscribe(pagedData => {
+  // this.page = pagedData.page;
+  // this.rows = pagedData.data;
+  // });
   // }
 }
 
@@ -53,6 +57,6 @@ export class Page {
 }
 
 export interface Post {
-  name: string;
-  username: string;
+  title: string;
+  body: string;
 }
